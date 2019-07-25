@@ -37,5 +37,26 @@ namespace WordToPdfLab.Controllers
 			Response.AppendHeader("content-disposition", "inline; filename=Offer.pdf");
 			return new FileStreamResult(new MemoryStream(result), "application/pdf");
 		}
+
+		public FileStreamResult Export2()
+		{
+			byte[] result = null;
+			Dictionary<string, string> fields = new Dictionary<string, string>();
+			fields.Add("Name", "曾彥博");
+			fields.Add("Job", "程式設計師");
+			fields.Add("Year", "2018");
+			fields.Add("Month", "11");
+			fields.Add("Day", "26");
+
+			PdfConverterV2 pdfConverter = new PdfConverterV2();
+
+			pdfConverter.GetPdf(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "templates\\Offer.docx"), fields);
+
+			string pdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "templates\\temp.pdf");
+
+
+			Response.AppendHeader("content-disposition", "inline; filename=Offer.pdf");
+			return new FileStreamResult(new FileStream(pdfPath, FileMode.Open), "application/pdf");
+		}
 	}
 }

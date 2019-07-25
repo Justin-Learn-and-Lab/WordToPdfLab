@@ -51,7 +51,8 @@ namespace WordToPdfLab.Lib
 				tmpRange = null;
 				//存成PDF檔案
 				object fileFormat = WdSaveFormat.wdFormatPDF;
-				doc.SaveAs2(FileName: ref outFile, FileFormat: ref fileFormat);
+				
+				doc.SaveAs(FileName: ref outFile, FileFormat: ref fileFormat);
 				//關閉Word檔
 				object dontSave = WdSaveOptions.wdDoNotSaveChanges;
 				((_Document)doc).Close(ref dontSave);
